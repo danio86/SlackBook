@@ -17,6 +17,9 @@ import dj_database_url
 if os.path.isfile("env.py"):
     import env
 
+development = os.environ.get('DEVELOPMENT', False)
+# This means that if there's an environment variable called DEVELOPMENT in the environment,
+# this variable will be set to its value. Otherwise, it'll be false.
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -34,7 +37,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = development
 
 # 2 hosts (heroku and local)
 ALLOWED_HOSTS = ['slack-book.herokuapp.com', 'localhost']
