@@ -1,0 +1,1 @@
+web: gunicorn slackbook_admin.wsgi
