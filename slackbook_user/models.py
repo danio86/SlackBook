@@ -6,12 +6,15 @@ from cloudinary.models import CloudinaryField
 STATUS = ((0, 'Draft'), (1, 'Published'))
 
 
-class topic(models.Model):
+class Topic(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     featured_image = CloudinaryField('image', default='placeholder')
     updated_on = models.DateTimeField(auto_now=True)
+    content = models.TextField()
     excerpt = models.TextField(blank=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    status = models.IntegerField(choices=STATUS, default=0)
 
     class Meta:
         ordering = ["-created_on"]
@@ -45,6 +48,7 @@ class Post(models.Model):
 
     def number_of_likes(self):
         return self.likes.count()
+
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,

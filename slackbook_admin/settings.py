@@ -55,7 +55,9 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
+    'django_summernote',
     'slackbook_user',
+    'base.apps.BaseConfig',
 ]
 
 MIDDLEWARE = [

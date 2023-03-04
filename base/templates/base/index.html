@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <h1>Home Template</h1>
+
+    <div>
+        <div>
+            {% for topic in channels %}
+                <h4>{{topic.id}} -- <a href="/channel/{{topic.id}}">{{topic.name}}</a></h4>
+                <!-- this leads to channel with the right id -->
+            {% endfor %}
+         </div>
+    </div>
+
+{% endblock %}

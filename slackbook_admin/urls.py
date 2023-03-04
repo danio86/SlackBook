@@ -14,8 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+# the include method allows to include URLs from other files
+# from base import views
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('base.urls')),
+    # path('channel/', views.channel, name='channell')
+
+    
+    # path('summernote/', include('django_summernote.urls')),
+    # this brings a text editor to the admin panel
+
 ]
