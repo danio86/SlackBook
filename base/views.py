@@ -19,7 +19,7 @@ def home(request):
 def channel(request, pk):
     channel = None
     for i in channels:
-        if i[id] == int(pk):
+        if i['id'] == int(pk):
             channel = i
     context = {'channel': channel}
     return render(request, 'base/channel.html', context)
