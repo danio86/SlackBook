@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('base.urls')),
     # path('channel/', views.channel, name='channell')
+    path('summernote/', include('django_summernote.urls')),
+    # path("accounts/", include("allauth.urls")),
 
     
     # path('summernote/', include('django_summernote.urls')),
