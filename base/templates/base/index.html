@@ -7,7 +7,7 @@
     <div>
         <div>
             {% for topic in channels %}
-                <h4>{{topic.id}} -- <a href="/channel/{{topic.id}}">{{topic.name}}</a></h4>
+                <h4>{{topic.id}} -- <a href="/channel/{{topic.id}}">{{topic.title}}</a></h4>
                 <!-- this leads to channel with the right id -->
 
             {% endfor %}
