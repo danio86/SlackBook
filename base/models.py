@@ -6,7 +6,19 @@ from cloudinary.models import CloudinaryField
 STATUS = ((0, 'Draft'), (1, 'Published'))
 
 
+class Topic(models.Model):
+    title = models.CharField(max_length=200, unique=True)
+
+    def __str__(self):
+        return self.title
+
+
 class Channel(models.Model):
+    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
+    # if the Topic Class would be below the this(Channel) Class
+    # Topic wouldt need quotes ('Topic')
+    # if the topic is deleted, the Channel is not deleted (SET_NULL)
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     # author = models.ForeignKey(
