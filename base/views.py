@@ -67,3 +67,18 @@ def updateChannel(request, pk):
 
     context = {'form': form}
     return render(request, 'base/channel_form.html', context)
+
+
+# def deleteChannel(request, pk):
+#     queryset = Channel.objects.get(id=pk)
+#     queryset.delete()
+#     return redirect('home')
+# this works but any user could delete every channel
+
+def deleteChannel(request, pk):
+    object = Channel.objects.get(id=pk)
+    context = {'object': object}
+    if request.method == 'POST':
+        object.delete()
+        return redirect('home')
+    return render(request, 'base/delete.html', context)

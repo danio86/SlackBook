@@ -12,6 +12,7 @@
             {% for topic in channels %}
             <div>
                 <a href="{% url 'update-channel' topic.id %}">Edit</a>
+                <a href="{% url 'delete-channel' topic.id %}">Delete</a>
                 <span>@{{ topic.host.username }}</span>
                 <!-- host.user is a django function -->
                 <h4>{{topic.id}} -- <a href="{% url 'channel' topic.id %} ">{{topic.title}}</a></h4>

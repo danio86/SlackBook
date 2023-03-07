@@ -13,4 +13,6 @@ urlpatterns = [
     # url don't the name of the html
     path(
      'update-channel/<str:pk>/', views.updateChannel, name='update-channel'),
+    path(
+     'delete-channel/<str:pk>/', views.deleteChannel, name='delete-channel'),
 ]
