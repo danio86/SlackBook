@@ -5,7 +5,10 @@
 
     <div>
         <form action="" method="POST">
-
+            <!-- if method is not specified, it will send to the current url -->
+            {% csrf_token %}
+            <!-- if somesthing is sendent the token needs to be included to avoid malicious attempts -->
+            <input type="submit" value="Submit">
         </form>
     </div>
 

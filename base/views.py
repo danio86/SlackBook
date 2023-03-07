@@ -34,3 +34,10 @@ def channel(request, pk):
 #             channel = i
 #     context = {'channel': channel}
 #     return render(request, 'base/channel.html', context)
+
+
+def createChannel(request):
+    """ queryset = Channel.objects.get(id=pk) """
+
+    context = {}
+    return render(request, 'base/channel_form.html', context)

@@ -3,7 +3,7 @@ from .models import Channel, Topic, Post
 from django_summernote.admin import SummernoteModelAdmin
 
 
-#admin.site.register(Channel)
+# admin.site.register(Channel)
 
 
 @admin.register(Channel)
