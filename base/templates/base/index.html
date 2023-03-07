@@ -11,10 +11,13 @@
         <div>          
             {% for topic in channels %}
             <div>
+                <a href="{% url 'update-channel' topic.id %}">Edit</a>
                 <span>@{{ topic.host.username }}</span>
                 <!-- host.user is a django function -->
-                <h4>{{topic.id}} -- <a href="/channel/{{topic.id}}">{{topic.title}}</a></h4>
-                <!-- this leads to channel with the right id -->
+                <h4>{{topic.id}} -- <a href="{% url 'channel' topic.id %} ">{{topic.title}}</a></h4>
+                <!-- <h4>{{topic.id}} -- <a href="/channel/{{topic.id}}">{{topic.title}}</a></h4> -->
+                <!-- this leads to channel(name!) with the right id -->
+                
                 <small>{{ topic.topic.title }}</small>
                 <hr>
             </div>

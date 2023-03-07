@@ -7,7 +7,9 @@
         <form action="" method="POST">
             <!-- if method is not specified, it will send to the current url -->
             {% csrf_token %}
+            {{ form.as_p }}
             <!-- if somesthing is sendent the token needs to be included to avoid malicious attempts -->
+            <!-- the .as_ps wraps a paragraph around every inputfield (looks nicer) -->
             <input type="submit" value="Submit">
         </form>
     </div>
