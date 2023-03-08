@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Channel
+from .models import Channel, Topic
 from .forms import ChannelForm
 
 # channels = [
@@ -13,9 +13,17 @@ from .forms import ChannelForm
 
 # Created views
 def home(request):
-    queryset = Channel.objects.all()
+    # r = request.GET.get('r') if request.GET.get('r') is not None else ''
+    r = request.GET.get('r') if request.GET.get('r') != None else ''
+
+    queryset = Channel.objects.filter(topic__title__icontains=r)
+    # this filters by Channel-topic-title (the__ takes the parent of topic)
+    # icontains means that r schouls at least be in the name.
+    # i means it doesnt metter if small or big letters
+    # queryset = Channel.objects.all()
     # puts all objects in the model to context to render in index.html
-    context = {'channels': queryset}
+    topics = Topic.objects.all()
+    context = {'channels': queryset, 'topics': topics}
     return render(request, 'base/index.html', context)
 
 

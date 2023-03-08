@@ -4,9 +4,37 @@
 {% block content %}
     <h1>Home Template</h1>
 
-    <div>
+    <style>
+        .home{
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            /* fr = fractions */
+        }
+    </style>
+    
+    <div class="home">
+        
 
-        <a href="{% url 'create-channel' %} ">Create Channel</a>
+        <div>
+            <h2>Topics</h2>
+            <hr>
+
+            <div>
+                <a href="{% url 'home' %}">All Topics</a>
+            </div>
+
+            {% for topic in topics %}
+                <div>
+                    <a href="{% url 'home' %}?r{{topic.title}}">{{topic.title}}</a>
+                    <!-- this leads to the home-page with the url-endig of ?r=topic.title (e.x. pizza) -->
+                    <!-- r = request couls be any letter -->
+                </div>
+            {% endfor %}
+
+        </div>
+
+        <div>
+            <a href="{% url 'create-channel' %} ">Create Channel</a>
 
         <div>          
             {% for topic in channels %}
@@ -24,6 +52,10 @@
             </div>
             {% endfor %}
          </div>
+
+        </div>
+
+        
 
     </div>
 
