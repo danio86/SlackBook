@@ -13,8 +13,8 @@ from .forms import ChannelForm
 
 # Created views
 def home(request):
-    # r = request.GET.get('r') if request.GET.get('r') is not None else ''
-    r = request.GET.get('r') if request.GET.get('r') != None else ''
+    r = request.GET.get('r') if request.GET.get('r') is not None else ''
+    # r = request.GET.get('r') if request.GET.get('r') != None else ''
 
     queryset = Channel.objects.filter(topic__title__icontains=r)
     # this filters by Channel-topic-title (the__ takes the parent of topic)
