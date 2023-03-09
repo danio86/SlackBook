@@ -1,8 +1,9 @@
 <a href="/">
     home/logo
 </a>
-
+<hr>
 <form action="{% url 'home' %}" method="GET">
     <input type="text" name="r" placeholder="Seach Channel...">
-
 </form>
+<hr>
+<a href="{% url 'register_login' %}">LogIn/Register</a>

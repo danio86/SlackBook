@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Channel, Topic
+from django.contrib.auth.models import User
 from .forms import ChannelForm
 from django.db.models import Q
-
+# from django.contrib import messages
 
 # channels = [
 #     {'id': 1, 'name': 'Recipes'},
@@ -14,6 +16,27 @@ from django.db.models import Q
 
 
 # Created views
+def loginView(request):
+    # only login is a django function. would produce an error
+    if request == 'POST':
+        # of form in register_login
+
+        username = request.POST.get('username')
+        username = request.POST.get('password')
+        # these 2 values will be sent from the frontend
+
+        try:
+            user = User.objects.get(username=username)
+            # to check if the user exists (User was imported)
+        # except UserPermissionError:
+        except:
+            messages.error(request, 'Wrong Username. Try again!')
+            # this message is an imported django message
+
+    context = {}
+    return render(request, 'base/register_login.html', context)
+
+
 def home(request):
     r = request.GET.get('r') if request.GET.get('r') is not None else ''
     # r = request.GET.get('r') if request.GET.get('r') != None else ''

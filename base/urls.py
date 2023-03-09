@@ -3,6 +3,7 @@ from . import views
 
 
 urlpatterns = [
+    path('register_login/', views.loginView, name='register_login'),
     path('', views.home, name='home'),
     path('channel/<str:pk>/', views.channel, name='channel'),
     # channel.html can now dynamically access
@@ -15,4 +16,5 @@ urlpatterns = [
      'update-channel/<str:pk>/', views.updateChannel, name='update-channel'),
     path(
      'delete-channel/<str:pk>/', views.deleteChannel, name='delete-channel'),
+    # path('register_login/', views.loginView, name='register_login'),
 ]
