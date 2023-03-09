@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Channel, Topic
 from .forms import ChannelForm
+from django.db.models import Q
+
 
 # channels = [
 #     {'id': 1, 'name': 'Recipes'},
@@ -16,14 +18,22 @@ def home(request):
     r = request.GET.get('r') if request.GET.get('r') is not None else ''
     # r = request.GET.get('r') if request.GET.get('r') != None else ''
 
-    queryset = Channel.objects.filter(topic__title__icontains=r)
+    queryset = Channel.objects.filter(
+        Q(topic__title__icontains=r) |
+        Q(title__icontains=r) |
+        Q(content__icontains=r)
+    )
     # this filters by Channel-topic-title (the__ takes the parent of topic)
+    # Or (|) other model attributes
     # icontains means that r schouls at least be in the name.
     # i means it doesnt metter if small or big letters
     # queryset = Channel.objects.all()
     # puts all objects in the model to context to render in index.html
     topics = Topic.objects.all()
-    context = {'channels': queryset, 'topics': topics}
+    channel_count = topics.count()
+
+    context = {
+        'channels': queryset, 'topics': topics, 'channel_count': channel_count}
     return render(request, 'base/index.html', context)
 
 
