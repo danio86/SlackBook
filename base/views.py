@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Channel, Topic
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 from .forms import ChannelForm
 from django.db.models import Q
 # from django.contrib import messages
@@ -28,10 +29,17 @@ def loginView(request):
         try:
             user = User.objects.get(username=username)
             # to check if the user exists (User was imported)
-        # except UserPermissionError:
-        except:
+        except ValueError:
             messages.error(request, 'Wrong Username. Try again!')
             # this message is an imported django message
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Wrong Username or Password. Try again!')
 
     context = {}
     return render(request, 'base/register_login.html', context)

@@ -19,16 +19,13 @@ from django.urls import path, include
 # from base import views
 
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('base.urls')),
     # path('channel/', views.channel, name='channell')
     path('summernote/', include('django_summernote.urls')),
-    # path("accounts/", include("allauth.urls")),
-    
+    path("accounts/", include("allauth.urls")),
 
-    
     # path('summernote/', include('django_summernote.urls')),
     # this brings a text editor to the admin panel
 

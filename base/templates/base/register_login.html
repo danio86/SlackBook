@@ -6,14 +6,13 @@
         <form action="" method="POST">
             {% csrf_token %}
 
-            <label for="">Username</label>
-            <input type="text" placeholder="Please enter Username" name="username">
+            <label for="username">Username: </label>
+            <input id="username" type="text" placeholder="Please enter Username" name="username">
 
-            <label for="">Password</label>
-            <input type="password" placeholder="Please enter Password" name="password">
+            <label for="password">Password: </label>
+            <input id="password" type="password" placeholder="Please enter Password" name="password">
             <hr>
-            <input type="submit"> LogIn
-
+            <input type="submit" value="Login">
         </form>
     </div>
 

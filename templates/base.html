@@ -12,13 +12,27 @@
     
     {% include 'navbar.html' %}
 
+    {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
+        </li>
+    {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+        </li>
+    {% endif %}
+
     {% if messages %}
-    print('???')
-        <ul class="messages">
-            {% for message in messages %}
-                <li></li>{{ message }}</li>
-            {% endfor %}
-        </ul>
+    <hr>
+    <h2>why?</h2>
+    <ul class="messages">
+        {% for message in messages %}
+            <li></li>{{ message }}</li>
+        {% endfor %}
+    </ul>
     {% endif %}
     <!-- ths block is copied from django documentation -->
 
