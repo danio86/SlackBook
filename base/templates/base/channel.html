@@ -2,6 +2,36 @@
 
 
 {% block content %}
+
     <h1>channel Template</h1>
-    {{channel.title}}
+    <hr>
+    {{ channel.topic }}
+    <hr>
+    {{ channel.title }}
+    <hr>
+    <div class="comment-field">
+        <h3>Disscussion</h3>
+        {{ channel.content }}
+        <hr>
+        {% for post in posts %}
+            <div>
+                <small>@{{ post.user }} - {{ post.created_on|timesince }} ago</small>
+                <!-- timesince replace the date and the time -->
+                <p>Comment: {{ post.body }}</p>
+                <hr> 
+            </div>
+        {% endfor%}
+    </div>
+
+    {% if request.user.is_authenticated %}
+    <div class="post-form">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Place your Comment..." name="body">
+            
+        </form>
+    </div>
+    {% endif %}
+    
+
 {% endblock %}

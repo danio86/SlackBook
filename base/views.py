@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpResponse
-from .models import Channel, Topic
+from .models import Channel, Topic, Post
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .forms import ChannelForm
@@ -78,7 +78,20 @@ def channel(request, pk):
     queryset = Channel.objects.get(id=pk)
     # puts the Channel-object (created in the admin panel) with the id
     # into context. django gives all objects a id by default
-    context = {'channel': queryset}
+    posts = queryset.post_set.all().order_by('created_on')
+    # this gives all attributes of the Channel-Model-Child Post
+    # (post in lower case!)
+
+    if request.method == 'POST':
+        post = Post.objects.create(
+            user=request.user,
+            channel=queryset,
+            body=request.POST.get('body'),
+        )
+        # Post was imported, create is a django function
+        return redirect('channel', pk)
+
+    context = {'channel': queryset, 'posts': posts}
     return render(request, 'base/channel.html', context)
 
 

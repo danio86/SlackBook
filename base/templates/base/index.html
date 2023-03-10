@@ -40,6 +40,7 @@
         <div>          
             {% for topic in channels %}
             <div>
+
                 {% if request.user == topic.host %}
                     <a href="{% url 'update-channel' topic.id %}">Edit</a>
                     <a href="{% url 'delete-channel' topic.id %}">Delete</a>
