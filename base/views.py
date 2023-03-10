@@ -20,6 +20,10 @@ from django.contrib.auth.decorators import login_required
 
 # Created views
 def loginView(request):
+
+    if request.user.is_authenticated:
+        return redirect('home')
+
     # only login is a django function. would produce an error
     if request == 'POST':
         # of form in register_login
