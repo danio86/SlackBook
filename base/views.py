@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.http import HttpResponse
 from .models import Channel, Topic
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .forms import ChannelForm
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 # from django.contrib import messages
 
 # channels = [
@@ -23,7 +25,7 @@ def loginView(request):
         # of form in register_login
 
         username = request.POST.get('username')
-        username = request.POST.get('password')
+        password = request.POST.get('password')
         # these 2 values will be sent from the frontend
 
         try:
@@ -84,9 +86,10 @@ def channel(request, pk):
 #     context = {'channel': channel}
 #     return render(request, 'base/channel.html', context)
 
-
+@login_required(login_url='/accounts/login/')
 def createChannel(request):
     form = ChannelForm()
+
     if request.method == 'POST':
         # method of the form in channel_form.html
         # print(request.POST)
@@ -103,10 +106,16 @@ def createChannel(request):
     return render(request, 'base/channel_form.html', context)
 
 
+@login_required(login_url='/accounts/login/')
 def updateChannel(request, pk):
     queryset = Channel.objects.get(id=pk)
     form = ChannelForm(instance=queryset)
     # this shows the prefild form to edit (instance is important!)
+
+    # if request.user != Channel.host:
+    if request.user != queryset.host:
+        return HttpResponse('You are not authorized!')
+
     if request.method == 'POST':
         form = ChannelForm(request.POST, instance=queryset)
         # this only updates the form. It doesn't refill it.
@@ -124,8 +133,13 @@ def updateChannel(request, pk):
 #     return redirect('home')
 # this works but any user could delete every channel
 
+@login_required(login_url='/accounts/login/')
 def deleteChannel(request, pk):
     object = Channel.objects.get(id=pk)
+
+    if request.user != object.host:
+        return HttpResponse('You are not authorized!')
+
     context = {'object': object}
     if request.method == 'POST':
         object.delete()
