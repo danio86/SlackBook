@@ -1,0 +1,14 @@
+<h3>Recent Avtivities</h3>
+            <hr>
+            {% for comment in comments %}
+                <div>
+                    <small>@{{ comment.user }} - {{ comment.created_on|timesince }}</small>
+                    <br>
+                    <h5>Channel: {{ comment.channel }}</h5>
+                    <h4>{{ comment }}</h4>
+                    {% if request.user == comment.user%}
+                        <a href="{% url 'delete-comment' comment.id %}"><button>Delete Comment</button></a>
+                    {% endif %}
+                </div>
+                <hr>
+            {% endfor %}

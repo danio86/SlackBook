@@ -1,0 +1,14 @@
+<h2>Channels</h2>
+            <hr>
+
+            <div>
+                <a href="{% url 'home' %}">All Channels</a>
+            </div>
+
+            {% for topic in topics %}
+                <div>
+                    <a href="{% url 'home' %}?r={{topic.title}}">{{topic.title}}</a>
+                    <!-- this leads to the home-page with the url-endig of ?r=topic.title (e.x. pizza) -->
+                    <!-- r = request couls be any letter -->
+                </div>
+            {% endfor %}
