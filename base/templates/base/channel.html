@@ -3,9 +3,20 @@
 
 {% block content %}
 
+
+
     <h1>channel Template</h1>
+
+    <style>
+        .channel{
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+        }
+    </style>
+
     <hr>
-    <div class="channel">
+    <div class="channels">
+
         <div>
             {{ channel.topic }}
             <hr>
