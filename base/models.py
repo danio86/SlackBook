@@ -21,7 +21,7 @@ class Channel(models.Model):
     # if the topic is deleted, the Channel is not deleted (SET_NULL)
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    guests = models.ManyToManyField(User, related_name='guests')
+    guests = models.ManyToManyField(User, related_name='guests', blank=True)
     # author = models.ForeignKey(
     #      User, on_delete=models.CASCADE, related_name="blog_posts"
     # )

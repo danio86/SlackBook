@@ -17,4 +17,6 @@ urlpatterns = [
     path(
      'delete-channel/<str:pk>/', views.deleteChannel, name='delete-channel'),
     # path('register_login/', views.loginView, name='register_login'),
+    path(
+     'delete-comment/<str:pk>/', views.deleteComment, name='delete-comment'),
 ]

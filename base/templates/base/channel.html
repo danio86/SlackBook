@@ -7,12 +7,12 @@
 
     <h1>channel Template</h1>
 
-    <style>
+    <!-- <style>
         .channel{
             display: grid;
             grid-template-columns: 3fr 1fr;
         }
-    </style>
+    </style> -->
 
     <hr>
     <div class="channels">
@@ -31,7 +31,11 @@
                         <small>@{{ post.user }} - {{ post.created_on|timesince }} ago</small>
                         <!-- timesince replace the date and the time -->
                         <p>Comment: {{ post.body }}</p>
+                        {% if request.user == post.user%}
+                            <a href="{% url 'delete-comment' post.id %}"><button>Delete Comment</button></a>
+                        {% endif %}
                         <hr> 
+                        
                     </div>
                 {% endfor%}
             </div>
@@ -43,6 +47,7 @@
                     <input type="text" placeholder="Place your Comment..." name="body">
                     
                 </form>
+                
             </div>
             {% endif %}
         </div>
@@ -50,6 +55,12 @@
         <div>
             <h3>Who is there?</h3>
             <hr>
+            {% for guest in guests %}
+                <div>
+                    <h5>@{{ guest }}</h5>
+                    <p>@{{ guest.username }}</p>
+                </div>
+            {% endfor %}
         </div>
 
     </div>

@@ -68,9 +68,11 @@ def home(request):
     # puts all objects in the model to context to render in index.html
     topics = Topic.objects.all()
     channel_count = topics.count()
+    comments = Post.objects.all()
 
     context = {
-        'channels': queryset, 'topics': topics, 'channel_count': channel_count}
+        'channels': queryset, 'topics': topics,
+        'channel_count': channel_count, 'comments': comments}
     return render(request, 'base/index.html', context)
 
 
@@ -78,9 +80,11 @@ def channel(request, pk):
     queryset = Channel.objects.get(id=pk)
     # puts the Channel-object (created in the admin panel) with the id
     # into context. django gives all objects a id by default
-    posts = queryset.post_set.all().order_by('created_on')
+    posts = queryset.post_set.all().order_by('-created_on')
     # this gives all attributes of the Channel-Model-Child Post
     # (post in lower case!)
+    guests = queryset.guests.all()
+    # .all because it's a many to many relationship
 
     if request.method == 'POST':
         post = Post.objects.create(
@@ -89,9 +93,13 @@ def channel(request, pk):
             body=request.POST.get('body'),
         )
         # Post was imported, create is a django function
+
+        queryset.guests.add(request.user)
+        # this makes everybody a guest of the channel who posts something
+
         return redirect('channel', pk)
 
-    context = {'channel': queryset, 'posts': posts}
+    context = {'channel': queryset, 'posts': posts, 'guests': guests}
     return render(request, 'base/channel.html', context)
 
 
@@ -156,6 +164,21 @@ def deleteChannel(request, pk):
 
     if request.user != object.host:
         return HttpResponse('You are not authorized!')
+
+    context = {'object': object}
+    if request.method == 'POST':
+        object.delete()
+        return redirect('home')
+    return render(request, 'base/delete.html', context)
+
+
+@login_required(login_url='/accounts/login/')
+def deleteComment(request, pk):
+    object = Post.objects.get(id=pk)
+
+    # if request.user != object.host:
+    # if request.user != object.user:
+    #     return HttpResponse('You are not authorized!')
 
     context = {'object': object}
     if request.method == 'POST':
