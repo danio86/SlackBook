@@ -68,7 +68,10 @@ def home(request):
     # puts all objects in the model to context to render in index.html
     topics = Topic.objects.all()
     channel_count = topics.count()
-    comments = Post.objects.all()
+    comments = Post.objects.all().order_by('-created_on').filter(
+        Q(channel__topic__title__icontains=r))
+    # this filters by the title of the topic of the channel
+    # if the url ending is in channel title
 
     context = {
         'channels': queryset, 'topics': topics,
@@ -184,4 +187,5 @@ def deleteComment(request, pk):
     if request.method == 'POST':
         object.delete()
         return redirect('home')
+        # return redirect('channel', Post.channel__id)
     return render(request, 'base/delete.html', context)
