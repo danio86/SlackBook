@@ -27,11 +27,7 @@
         <a href="{% url 'create-channel' %} ">Create Channel</a>
         <hr>
         {% include 'base/channels_available.html' %}
-        <hr>
-
-        {% for channels in user_channels %}
-            {{ user_channels }}
-        {% endfor %}
+        
         
     </div>
 

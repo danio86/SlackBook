@@ -2,7 +2,7 @@
             <hr>
             {% for comment in comments %}
                 <div>
-                    <small>@{{ comment.user }} - {{ comment.created_on|timesince }}</small>
+                    <small><a href="{% url 'user-account' comment.user.id %}">@{{ comment.user }}</a> - {{ comment.created_on|timesince }}</small>
                     <br>
                     <h5>Channel: {{ comment.channel }}</h5>
                     <h4>{{ comment }}</h4>

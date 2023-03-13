@@ -85,8 +85,11 @@ def userAccount(request, pk):
     # this gives the whole Channel Model of the User with the right id
     # channels in context need to be called channels
     # because channel_availiable.html asks for channels!
+    user_comments = queryset.post_set.all()
+    catgories = Topic.objects.all()
 
-    context = {'user': queryset, 'channels': user_channels}
+    context = {'user': queryset, 'channels': user_channels,
+               'comments': user_comments, 'topics': catgories}
     return render(request, 'base/account.html', context)
 
 
