@@ -8,3 +8,8 @@
     display: grid;
     grid-template-columns: 3fr 1fr;
 }
+
+.user-account{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}

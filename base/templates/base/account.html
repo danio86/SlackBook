@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<!-- <style>
+    .user-account{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        /* fr = fractions */
+    }
+</style> -->
+
+
+<h1>User Account</h1>
+<h2>{{ user }}</h2>
+<!-- <h2>{{ user.username }}</h2> -->
+
+<div class="user-account">
+
+    <div>
+        {% include 'base/category.html' %}
+    </div>
+
+    <div>
+        <h4>{{channel_count}} Channels available</h4>
+        <a href="{% url 'create-channel' %} ">Create Channel</a>
+        <hr>
+        {% include 'base/channels_available.html' %}
+
+        {% for channels in user_channels %}
+            {{ user_channels }}
+        {% endfor %}
+        
+    </div>
+
+    <div>
+        {% include 'base/recent_activities.html' %}
+    </div>
+
+</div>
+
+
+
+{% endblock %}

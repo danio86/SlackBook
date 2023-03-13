@@ -79,6 +79,14 @@ def home(request):
     return render(request, 'base/index.html', context)
 
 
+def userAccount(request, pk):
+    queryset = User.objects.get(id=pk)
+    user_channels = queryset.channel_set.all()
+
+    context = {'user': queryset, 'user_channels': user_channels}
+    return render(request, 'base/account.html', context)
+
+
 def channel(request, pk):
     queryset = Channel.objects.get(id=pk)
     # puts the Channel-object (created in the admin panel) with the id

@@ -6,7 +6,7 @@
             <a href="{% url 'delete-channel' topic.id %}">Delete</a>
         {% endif %}
 
-        <span>@{{ topic.host.username }}</span>
+        <a href="{% url 'user-account' topic.host.id %}"><span>@{{ topic.host.username }}</span></a>
         <!-- host.user is a django function -->
         <h4>{{topic.id}} -- <a href="{% url 'channel' topic.id %} ">{{topic.title}}</a></h4>
         <!-- <h4>{{topic.id}} -- <a href="/channel/{{topic.id}}">{{topic.title}}</a></h4> -->
