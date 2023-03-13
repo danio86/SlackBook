@@ -141,8 +141,11 @@ def createChannel(request):
         if form.is_valid():
             channel = form.save(commit=False)
             channel.host = request.user
+            channel.save()
             # once a valid form is saved i want to redirect to home(index) page
             # the url name is targeted
+            # commir=False pevents the form values to get saved automaticly
+            # then you can still change values you need to change.
             # now i want to show the updated form in another html > new view!
             return redirect('home')
     context = {'form': form}
