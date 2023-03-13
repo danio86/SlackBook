@@ -82,8 +82,11 @@ def home(request):
 def userAccount(request, pk):
     queryset = User.objects.get(id=pk)
     user_channels = queryset.channel_set.all()
+    # this gives the whole Channel Model of the User with the right id
+    # channels in context need to be called channels
+    # because channel_availiable.html asks for channels!
 
-    context = {'user': queryset, 'user_channels': user_channels}
+    context = {'user': queryset, 'channels': user_channels}
     return render(request, 'base/account.html', context)
 
 
