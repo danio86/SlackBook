@@ -139,7 +139,8 @@ def createChannel(request):
         form = ChannelForm(request.POST)
         # this passis the POST into the form automatically.
         if form.is_valid():
-            form.save()
+            channel = form.save(commit=False)
+            channel.host = request.user
             # once a valid form is saved i want to redirect to home(index) page
             # the url name is targeted
             # now i want to show the updated form in another html > new view!

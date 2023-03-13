@@ -6,6 +6,7 @@ class ChannelForm(ModelForm):
     class Meta:
         model = Channel
         fields = '__all__'
+        exclude = ['host', 'content', 'guests', 'status', 'slug']
 
 # this shows the model(Channel) i want to create a form for and the
 # writable fields. Alternatively: ['body', 'title',...]
