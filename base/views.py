@@ -207,3 +207,9 @@ def deleteComment(request, pk):
         return redirect('home')
         # return redirect('channel', Post.channel__id)
     return render(request, 'base/delete.html', context)
+
+
+def base2(request):
+
+    context = {}
+    return render(request, 'base/base2.html', context)
